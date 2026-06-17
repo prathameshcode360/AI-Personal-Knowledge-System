@@ -5,7 +5,9 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 // Generate answer using Gemini
 const generateAnswer = async (question, context, chatHistory = []) => {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash",
+    });
 
     // Build prompt
     const systemPrompt = `You are an AI assistant that answers questions based ONLY on the provided context. 

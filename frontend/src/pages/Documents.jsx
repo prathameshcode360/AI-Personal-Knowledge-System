@@ -58,6 +58,13 @@ const Documents = () => {
   };
 
   const handleDelete = async (id) => {
+    console.log("Deleting:", id);
+
+    if (!id) {
+      toast.error("Document ID not found");
+      return;
+    }
+
     if (!confirm("Are you sure you want to delete this document?")) return;
 
     try {
@@ -140,34 +147,37 @@ const Documents = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {documents.map((doc) => (
-                  <tr key={doc.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <FileText size={20} className="text-gray-400 mr-2" />
-                        <span className="text-sm font-medium text-gray-900">
-                          {doc.title}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                      {doc.fileType.toUpperCase()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {getStatusBadge(doc.status)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                      {new Date(doc.uploadedAt).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right">
-                      <button
-                        onClick={() => handleDelete(doc.id)}
-                        className="text-red-600 hover:text-red-800 transition-colors">
-                        <Trash2 size={18} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {documents.map((doc) => {
+                  console.log(doc);
+                  return (
+                    <tr key={doc._id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <FileText size={20} className="text-gray-400 mr-2" />
+                          <span className="text-sm font-medium text-gray-900">
+                            {doc.title}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                        {doc.fileType.toUpperCase()}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {getStatusBadge(doc.status)}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                        {new Date(doc.uploadedAt).toLocaleDateString()}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right">
+                        <button
+                          onClick={() => handleDelete(doc._id)}
+                          className="text-red-600 hover:text-red-800 transition-colors">
+                          <Trash2 size={18} />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

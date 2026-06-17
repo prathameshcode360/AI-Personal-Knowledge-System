@@ -7,13 +7,12 @@ const vectorSearch = async (userId, queryEmbedding, limit = 5) => {
     // MongoDB Atlas Vector Search aggregation pipeline
     const pipeline = [
       {
-        $search: {
+        $vectorSearch: {
           index: "vector_index",
-          knnBeta: {
-            vector: queryEmbedding,
-            path: "chunks.embedding",
-            k: limit,
-          },
+          path: "chunks.embedding",
+          queryVector: queryEmbedding,
+          numCandidates: 100,
+          limit: limit,
         },
       },
       {

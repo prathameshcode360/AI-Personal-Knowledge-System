@@ -55,8 +55,14 @@ const splitTextIntoChunks = (text, chunkSize = 1000, overlap = 200) => {
 // Generate embedding for a chunk
 const generateEmbedding = async (text) => {
   try {
-    const model = genAI.getGenerativeModel({ model: "embedding-001" });
+    const model = genAI.getGenerativeModel({
+      model: "gemini-embedding-001",
+    });
+
     const result = await model.embedContent(text);
+
+    console.log("Embedding dimensions:", result.embedding.values.length);
+
     return result.embedding.values;
   } catch (error) {
     console.error("Error generating embedding:", error);
