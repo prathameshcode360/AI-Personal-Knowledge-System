@@ -25,7 +25,9 @@ const setupVectorSearchIndex = async () => {
     console.log("Creating vector search index...");
     // Index creation will be done via MongoDB Atlas UI
     console.log("Please create vector search index in MongoDB Atlas:");
-    console.log("Collection: documents, Field: embedding, Dimensions: 768");
+    console.log("Collection: documents");
+    console.log("Field: chunks.embedding");
+    console.log("Dimensions: 3072");
   }
 };
 

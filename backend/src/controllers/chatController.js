@@ -49,6 +49,15 @@ const sendMessage = async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(10);
 
+    // Debug log
+    console.log(
+      "Chat History:",
+      chatHistory.map((msg) => ({
+        role: msg.role,
+        content: msg.content,
+      })),
+    );
+
     // Retrieve relevant document chunks
     const relevantChunks = await retrieveRelevantChunks(req.user._id, message);
 
